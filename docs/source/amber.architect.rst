@@ -7,7 +7,7 @@ amber.architect
 Rationale
 ----------
 
-This module :mod:`amber.architect` can be devided into four major components. It's easy to imagine
+This module :mod:`amber.architect` can be divided into four major components. It's easy to imagine
 a model space to sample models from, and a training environment as a placeholder for
 different components to interact. Currently the model space is pre-defined, but we can make it
 dynamic and evolving in the future.
