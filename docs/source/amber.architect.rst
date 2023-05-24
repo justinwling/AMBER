@@ -28,7 +28,7 @@ The manager is perhaps the most tedious. The general workflow is:
     5. stores the model in a buffer :obj:`buffer_fn.store(model, reward)`,
     6. returns the reward signal to the search algorithm.
 
-Each of the steps has variantions, but the overall layout should almost always stay as described above.
+Each of the steps have variations, but the overall layout should almost always stay as described above.
 
 
 Model Space
