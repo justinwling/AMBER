@@ -20,7 +20,7 @@ def get_buffer(arg):
     Parameters
     ----------
     arg : str or callable
-        return the buffer constructor corresponding to that identifier; if is callable, assume it's a buffer constructor
+        return the buffer constructor corresponding to that identifier; if it's callable, assume it's a buffer constructor
         already, do nothing and return it
 
     Returns
