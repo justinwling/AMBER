@@ -1,4 +1,4 @@
-"""Typing definitionsa and hints for amber.architect
+"""Typing definitions and hints for amber.architect
 """
 from typing import List, Tuple, Dict, Set, Callable, Optional, Union, Sequence
 from amber import backend as F
