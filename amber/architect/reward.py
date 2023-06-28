@@ -110,23 +110,52 @@ class LossAucReward(Reward):
         If is None, return the negative loss as is. A constant to scale loss reward, if specified. Default is None.
 
     knowledge_c : float or None
-        If is None, return the knowledge reward as is. A constant to scale knowledge reward, if specified. Default is None.
+        If is None, return the knowledge reward as is. A constant to scale knowledge reward, if specified. Default is None
+        
+    Metrics
+    -------
 
+    To obtain performance scores and model performance metrics functions from the module sklearn.metrics can be used, such as
+    roc_auc_score, average_precision_score, brier_score_loss, matthews_corrcoef
+
+    Example
+    -------
+    >>> from sklearn.metrics import roc_auc_score, average_precision_score
+    >>> auc = roc_auc_score(y, pred)
+    >>> aupr = average_precision_score(y, pred)
+    
+    
+    Custom Reward Functions
+    -----------------------
+
+    Custom reward functions can be used by parsing a lambda function or custom function that takes y_true and y_score as arguments
+     - e.g. 'reward_fn': {'method': lambda y_true, y_score: f(y_true, y_score)}
+     
 
     Examples
     --------
     Constructing the reward function for AUPR on the basis of validation data::
 
-        >>> from amber.architect.reward import LossAucReard
+        >>> from amber.architect.reward import LossAucReward
         >>> reward_fn = LossAucReward(method="aupr")
         >>> reward_fn(model, val_data)
 
     Alternatively, use the spearman correlation instead of AUPR for regression tasks::
 
-        >>> from amber.architect.reward import LossAucReard
+        >>> from amber.architect.reward import LossAucReward
         >>> import scipy.stats as ss
         >>> reward_fn = LossAucReward(method=lambda y_true, y_score: ss.spearmanr(y_true, y_score).correlation)
         >>> reward_fn(model, val_data)
+
+    Using multiple performance scores as componenets of a reward function
+
+        >>> from sklearn.metrics import roc_auc_score, average_precision_score
+        >>> from amber.architect.reward import LossAucReward
+        >>> auc = roc_auc_score(y, pred)
+        >>> aupr = average_precision_score(y, pred)
+        >>> reward = auc + aupr
+
+    
     """
     def __init__(self, method='auc', knowledge_function=None, Lambda=1, loss_c=None, knowledge_c=None, *args, **kwargs):
         if method == 'auc' or method == 'auroc':
