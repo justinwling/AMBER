@@ -69,14 +69,14 @@ class Buffer(BaseModelBuffer):
 
     An entire short-term buffer will correspond to one entry in long-term buffer.
 
-    Short-term buffers will be emptied when converted to long-term, and long-term buffers will be kept at a maximum
-    length specified by ``max_size`` argument.
+    Short-term buffers will be emptied when converted to long-term, and long-term buffers have a maximum
+    size/length specified by the ``max_size`` argument.
 
     Parameters
     ----------
     max_size : int
-        The maximum number of controller steps of sampled architectures to store. Stored data beyond the last ``max_size``
-        will be dumped to disk.
+        The maximum number/interations of controller steps of sampled architectures to store. Stored data beyond the last ``max_size``
+        will be dumped to disk. 
 
     discount_factor : float
         Temporal discount factor. Not used for now.
