@@ -151,10 +151,18 @@ class LossAucReward(Reward):
 
         >>> from sklearn.metrics import roc_auc_score, average_precision_score
         >>> from amber.architect.reward import LossAucReward
-        >>> auc = roc_auc_score(y, pred)
-        >>> aupr = average_precision_score(y, pred)
-        >>> reward = auc + aupr
-
+        >>>
+        >>> class CompositeReward(architect.reward.LossAucReward):
+        >>>    def __call__(self, model, data, *args, **kwargs):
+        >>>        pred, y = self.get_pred(model=model, data=data)
+        >>>        pred, y = pred[0], y[0]
+        >>>        
+        >>>        auc = roc_auc_score(y, pred)
+        >>>        aupr = average_precision_score(y, pred)
+        >>>        reward = auc + aupr
+        >>>        loss_and_metrics = [reward]
+        >>>        reward_metrics={}
+        >>>        return reward, loss_and_metrics, reward_metrics
     
     """
     def __init__(self, method='auc', knowledge_function=None, Lambda=1, loss_c=None, knowledge_c=None, *args, **kwargs):
